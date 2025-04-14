@@ -14,8 +14,8 @@ DEFINE_int32(role, -1, "role, defalut value is -1, mean run all role");
 DEFINE_string(type, "grpc", "channel type: 'grpc', 'mem', current default is 'grpc'");
 
 DEFINE_int32(enable_cv, 1, "use condition variables instead spinlock");
-DEFINE_string(redis_uri, "tcp://127.0.0.1:6379", "redis url, default is 'tcp://127.0.0.1:6379'");
-DEFINE_string(server_addr, "127.0.0.1:9900", "grpc server addr, default is '127.0.0.1:9900'");
+DEFINE_string(redis_uri, "tcp://redis123@10.100.66.68:9379", "redis url, default is 'tcp://127.0.0.1:6379'");
+DEFINE_string(server_addr, "10.100.66.68:6800", "grpc server addr, default is '127.0.0.1:9900'");
 DEFINE_int32(log_level, 3, "log level, 0-6, default is 0");
 
 static inline std::unique_ptr<gaianet::IChannel> create_channel(const std::string& taskid, uint32_t from, uint32_t to) {

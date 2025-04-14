@@ -140,12 +140,12 @@ def _com_github_hiredis():
     maybe(
         http_archive,
         name = "com_github_hiredis",
-        sha256 ="82ad632d31ee05da13b537c124f819eb88e18851d9cb0c30ae0552084811588c",
-        strip_prefix = "hiredis-1.2.0",
+        sha256 ="fe6d21741ec7f3fc9df409d921f47dfc73a4d8ff64f4ac6f1d95f951bf7f53d6",
+        strip_prefix = "hiredis-1.1.0",
         build_file = "@gaia_net//bazel:hiredis.BUILD",
         type = "tar.gz",
         urls = [
-            "https://github.com/redis/hiredis/archive/refs/tags/v1.2.0.tar.gz",
+            "https://github.com/redis/hiredis/archive/refs/tags/v1.1.0.tar.gz",
         ],
     )
 

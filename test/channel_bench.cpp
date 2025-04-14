@@ -9,15 +9,15 @@
 #include <signal.h>
 #include <thread>
 #include <fmt/format.h>
-DEFINE_string(taskid, "channel_bench_cpp_", "task id, defalut is 'channel_bench_cpp_'");
+DEFINE_string(taskid, "channel_bench_cpp_1", "task id, defalut is 'channel_bench_cpp_'");
 DEFINE_int32(role, -1, "role, defalut value is -1, mean run all role");
 DEFINE_string(type, "grpc", "channel type: 'grpc', 'mem', current default is 'grpc'");
 DEFINE_int32(max_packet_size, 1024 * 16, "max packet size");
 DEFINE_int32(loop_cnt, 0, "loop count, default 0 mean no limit");
 DEFINE_int32(enable_cv, 1, "use condition variables instead spinlock");
 DEFINE_int32(thread, 1, "test thread count");
-DEFINE_string(redis_uri, "tcp://127.0.0.1:6379", "redis url, default is 'tcp://127.0.0.1:6379'");
-DEFINE_string(server_addr, "127.0.0.1:9900", "grpc server addr, default is '127.0.0.1:9900'");
+DEFINE_string(redis_uri, "tcp://redis123@10.100.66.68:9379", "redis url, default is 'tcp://redis123@10.100.66.68:9379'");
+DEFINE_string(server_addr, "10.100.66.68:6800", "grpc server addr, default is '10.100.66.68:6800'");
 
 //
 // grpc channel 20MB/s
@@ -58,7 +58,7 @@ static inline std::string get_rand_string_fast(uint32_t* seed) {
 }
 
 static inline std::unique_ptr<gaianet::IChannel> create_channel(const std::string& taskid, uint32_t from, uint32_t to) {
-    auto FLAGS_type  = "mem";
+    // auto FLAGS_type  = "mem";
     if (FLAGS_type == "grpc") {
         return std::unique_ptr<gaianet::IChannel>(new gaianet::channel(from, to, taskid, FLAGS_server_addr, FLAGS_redis_uri));
     } else if (FLAGS_type == "mem") {

@@ -25,7 +25,9 @@ filegroup(
 cmake(
     name = "redis_plus_plus",
     lib_source = ":all_srcs",
-    out_headers_only = True,
+    generate_args = ["-GNinja"],
+    out_include_dir = "include",
+    out_static_libs = ["libredis++.a"],
     deps = ["@com_github_hiredis//:hiredis"],
 )
 

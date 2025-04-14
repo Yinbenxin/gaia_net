@@ -45,10 +45,10 @@ cc_library(
         "@com_github_grpc_grpc//:grpc++",
         "@com_google_googletest//:gtest_main",
     ],
-    # copts = [
-    #     "-I.",
-    #     "-I$(GENDIR)/src",
-    # ],
+    copts = [
+        "-I.",
+        "-I$(GENDIR)/src",
+    ],
     strip_include_prefix = ".",
 
 )

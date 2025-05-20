@@ -10,9 +10,9 @@ filegroup(
 cmake(
     name = "hiredis",
     lib_source = ":all_srcs",
-    generate_args = ["-GNinja"],
     cache_entries = {
         "CMAKE_POSITION_INDEPENDENT_CODE": "ON",
+        "CMAKE_INSTALL_LIBDIR": "lib",
     },
     out_include_dir = "include",
     out_static_libs = ["libhiredis.a"],

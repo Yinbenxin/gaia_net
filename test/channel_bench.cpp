@@ -11,7 +11,7 @@
 #include <fmt/format.h>
 DEFINE_string(taskid, "channel_bench_cpp_1", "task id, defalut is 'channel_bench_cpp_'");
 DEFINE_int32(role, -1, "role, defalut value is -1, mean run all role");
-DEFINE_string(type, "grpc", "channel type: 'grpc', 'mem', current default is 'grpc'");
+DEFINE_string(type, "mem", "channel type: 'grpc', 'mem', current default is 'grpc'");
 DEFINE_int32(max_packet_size, 1024 * 16, "max packet size");
 DEFINE_int32(loop_cnt, 0, "loop count, default 0 mean no limit");
 DEFINE_int32(enable_cv, 1, "use condition variables instead spinlock");

@@ -31,6 +31,13 @@ cc_library(
         "gaia_utils/*.h",
         "gaia_utils/extern/**/*.h",
     ]),
+    linkopts = select({
+        "@platforms//os:macos": [
+            "-framework CoreFoundation",
+            "-framework Security",
+        ],
+        "//conditions:default": [],
+    }),
     deps = [
         ":gaia_cc_grpc",
         "@com_github_fmtlib_fmt//:fmtlib",  

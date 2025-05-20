@@ -11,7 +11,7 @@
 
 DEFINE_string(taskid, "channel_test", "task id, defalut is 'channel_test'");
 DEFINE_int32(role, -1, "role, defalut value is -1, mean run all role");
-DEFINE_string(type, "grpc", "channel type: 'grpc', 'mem', current default is 'grpc'");
+DEFINE_string(type, "mem", "channel type: 'grpc', 'mem', current default is 'grpc'");
 
 DEFINE_int32(enable_cv, 1, "use condition variables instead spinlock");
 DEFINE_string(redis_uri, "tcp://redis123@10.100.66.68:9379", "redis url, default is 'tcp://127.0.0.1:6379'");

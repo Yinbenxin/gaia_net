@@ -14,7 +14,7 @@
 #include <map>
 #include <mutex>
 #include <thread>
-
+#include <cstring> 
 #if defined __aarch64__
 constexpr std::size_t platform_cache_line_size = 64;
 #elif defined __x86_64__

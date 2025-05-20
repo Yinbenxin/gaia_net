@@ -7,6 +7,7 @@ cc_test(
             "-framework Security",
         ],
         "//conditions:default": [
+            "-lrt",  # 添加 rt 库的链接选项
         ],
     }),
     deps = [
@@ -23,6 +24,7 @@ cc_test(
             "-framework Security",
         ],
         "//conditions:default": [
+            "-lrt",  # 添加 rt 库的链接选项
         ],
     }),
     deps = [

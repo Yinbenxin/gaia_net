@@ -24,7 +24,7 @@ constexpr std::size_t platform_cache_line_size = 128;
 #endif
 
 #if defined __APPLE__
-constexpr const int macos_buf_size = 1024 * 16;
+
 #elif defined __linux__
 #else
 #error "not support os"

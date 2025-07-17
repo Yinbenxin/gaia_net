@@ -4,7 +4,7 @@
 #pragma once
 
 #include "ichannel.h"
-
+constexpr const int macos_buf_size = 1<<30; // 1GB
 namespace gaianet {
 
     namespace detail {
@@ -13,7 +13,7 @@ namespace gaianet {
 
     class MemChannel final : public IChannel {
       public:
-        MemChannel(uint32_t from_party, uint32_t to_party, const std::string& taskid, bool enable_cv = true, int buf_size = 1024 * 16);
+        MemChannel(uint32_t from_party, uint32_t to_party, const std::string& taskid, bool enable_cv = true, int buf_size = macos_buf_size);
         ~MemChannel();
 
         virtual void send(const void* buf, uint64_t nbytes) override;

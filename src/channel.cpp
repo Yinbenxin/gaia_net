@@ -11,6 +11,7 @@
 #include "grpc_client.h"
 
 // #include "// gaialog.h"
+uint32_t CHUNK_SIZE = 500 * 1024 * 1024; // redis最大容纳512MB
 
 static std::string get_lz4_compress_str(const char* data, int len) {
     std::string ret;
@@ -245,7 +246,19 @@ namespace gaianet {
     }
 
     void channel::send(std::string& str) {
-        real_send(str);
+        if (m_use_redis)
+        {
+        uint32_t cipher_size = str.size();
+        send(&cipher_size, sizeof(uint32_t));
+        uint32_t sent_size = 0;
+        while (sent_size < str.size()) {
+            uint32_t chunk_size = std::min(CHUNK_SIZE, str.size() - sent_size);
+            send(str.data() + sent_size, chunk_size);
+            sent_size += chunk_size;
+        }
+        }else{
+            real_send(str);
+        }
     }
 
     void channel::send_with_compress(const void* buf, uint64_t nbytes) {
@@ -267,7 +280,23 @@ namespace gaianet {
     }
 
     void channel::recv(std::string& str) {
-        real_recv(str);
+        if (m_use_redis)
+        {
+            uint32_t cipher_size = 0;
+            recv(&cipher_size, sizeof(uint32_t));
+            string cipher_features;
+            cipher_features.resize(cipher_size);
+            uint32_t received_size = 0;
+            while (received_size < cipher_size) {
+                uint32_t chunk_size = std::min(CHUNK_SIZE, cipher_size - received_size);
+                recv(cipher_features.data() + received_size, chunk_size);
+                received_size += chunk_size;
+            }
+        }else{
+             real_recv(str);
+        }
+        
+
     }
 
     void channel::recv_with_decompress(void* pbuf, uint64_t length) {

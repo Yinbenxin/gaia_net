@@ -1,36 +1,32 @@
-# ###############################################################################
-# # Bazel now uses Bzlmod by default to manage external dependencies.
-# # Please consider migrating your external dependencies from WORKSPACE to MODULE.bazel.
-# #
-# # For more details, please check https://github.com/bazelbuild/bazel/issues/18958
-# ###############################################################################
+module(
+    name = "gaia_net",
+    version = "0.3.0.dev2025729",
+    compatibility_level = 1,
+)
+bazel_dep(name = "rules_proto", version = "6.0.0.bcr.1", repo_name = "rules_proto")
+bazel_dep(name = "apple_support", version = "1.17.1", repo_name = "build_bazel_apple_support")
+bazel_dep(name = "rules_apple", version = "3.16.0", repo_name = "build_bazel_rules_apple")
+bazel_dep(name = "googleapis", version = "0.0.0-20240819-fe8ba054a", repo_name = "com_google_googleapis")
+bazel_dep(name = "protobuf", version = "27.3", repo_name = "com_google_protobuf")
+non_module_dependencies = use_extension("//bazel:defs.bzl", "non_module_dependencies")
+use_repo(
+    non_module_dependencies,
+    "rules_foreign_cc",
+    "rules_python",
+    "rules_cc",
+    "platforms",
+    "upb",
+    "com_google_absl",
+    "com_github_openssl_openssl",
+    "com_github_grpc_grpc",
+    "com_github_nlohmann_json",
+    "com_google_googletest",
+    "com_github_gflags_gflags",
+    "com_github_fmtlib_fmt",
+    "com_github_lz4",
+    "com_github_hiredis",
+    "com_github_redis_plus_plus",
+)
 
-# # https://registry.bazel.build/modules/apple_support
-# bazel_dep(name = "apple_support", version = "1.17.1", repo_name="build_bazel_apple_support")
 
-# # https://registry.bazel.build/modules/rules_cc
-# bazel_dep(name = "rules_cc", version = "0.0.9")
 
-# # https://registry.bazel.build/modules/rules_apple
-# bazel_dep(name = "rules_apple", version = "3.9.2", repo_name="build_bazel_rules_apple")
-
-# # https://registry.bazel.build/modules/gazelle
-# bazel_dep(name = "gazelle", version = "0.39.1", repo_name = "bazel_gazelle")
-
-# # https://registry.bazel.build/modules/rules_proto
-# bazel_dep(name = "rules_proto", version = "6.0.0-rc2")
-
-# # https://registry.bazel.build/modules/googleapis
-# bazel_dep(name = "googleapis", version = "0.0.0-20240819-fe8ba054a", repo_name="com_google_googleapis")
-
-# # https://registry.bazel.build/modules/protobuf
-# bazel_dep(name = "protobuf", version = "28.2", repo_name = "com_google_protobuf")
-
-# # https://registry.bazel.build/modules/rules_go
-# bazel_dep(name = "rules_go", version = "0.50.1", repo_name = "io_bazel_rules_go")
-
-# # https://registry.bazel.build/modules/rules_python
-# bazel_dep(name = "rules_python", version = "0.36.0")
-
-# # https://registry.bazel.build/modules/grpc
-# bazel_dep(name = "grpc", version = "1.66.0.bcr.2", repo_name = "com_github_grpc_grpc")

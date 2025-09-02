@@ -248,14 +248,14 @@ namespace gaianet {
     void channel::send(std::string& str) {
         if (m_use_redis)
         {
-        uint32_t cipher_size = str.size();
-        send(&cipher_size, sizeof(uint32_t));
-        uint32_t sent_size = 0;
-        while (sent_size < str.size()) {
-            uint32_t chunk_size = std::min(CHUNK_SIZE, str.size() - sent_size);
-            send(str.data() + sent_size, chunk_size);
-            sent_size += chunk_size;
-        }
+            uint32_t str_size = str.size();
+            send(&str_size, sizeof(uint32_t));
+            uint32_t sent_size = 0;
+            while (sent_size < str.size()) {
+                uint32_t chunk_size = std::min(CHUNK_SIZE, str_size - sent_size);
+                send(str.data() + sent_size, chunk_size);
+                sent_size += chunk_size;
+            }
         }else{
             real_send(str);
         }
@@ -281,22 +281,19 @@ namespace gaianet {
 
     void channel::recv(std::string& str) {
         if (m_use_redis)
-        {
-            uint32_t cipher_size = 0;
-            recv(&cipher_size, sizeof(uint32_t));
-            string cipher_features;
-            cipher_features.resize(cipher_size);
+        {   
+            uint32_t str_size = 0;
+            recv(&str_size, sizeof(uint32_t));
+            str.resize(str_size);
             uint32_t received_size = 0;
-            while (received_size < cipher_size) {
-                uint32_t chunk_size = std::min(CHUNK_SIZE, cipher_size - received_size);
-                recv(cipher_features.data() + received_size, chunk_size);
+            while (received_size < str_size) {
+                uint32_t chunk_size = std::min(CHUNK_SIZE, str_size - received_size);
+                recv(str.data() + received_size, chunk_size);
                 received_size += chunk_size;
             }
         }else{
              real_recv(str);
         }
-        
-
     }
 
     void channel::recv_with_decompress(void* pbuf, uint64_t length) {
